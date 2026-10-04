@@ -9,13 +9,13 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 if __name__ == "__main__":
 
-    logging.info(f"Starting pipeline for folder: {folder}")
-
     # using argparse to enable using the folder dynamically
     parser = argparse.ArgumentParser(description="Process weather JSON files.")
     parser.add_argument("--input", type=str, required=True, help="Path to the JSON folder")
     args = parser.parse_args()
     folder = args.input
+
+    logging.info(f"Starting pipeline for folder: {folder}")
 
     data = [] # Current weather data of all cities in the folder
 
