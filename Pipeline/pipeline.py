@@ -33,5 +33,6 @@ df_clean = df_filtered.rename(columns={
     "current.condition.text": "condition"
 })
 
-print(df_clean)
+df_sorted = df_clean.sort_values(by="temperature_c", ascending=False)
+print(df_sorted)
 
