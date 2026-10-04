@@ -12,7 +12,7 @@ for filename in os.listdir(folder):
         file_data = json.load(file)
         data.append(file_data)
 
-# print City, Date, Local Time and Temperature
+# print City, Date, Local Time and Temperature of the first 5 cities
 for item in data[:5]:
     city = item.get("location", {}).get("name", "Unknown")
     date = item.get("location", {}).get("localtime", "Unknown")
