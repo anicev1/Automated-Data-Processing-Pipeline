@@ -1,13 +1,19 @@
-import json
-import os
+import json, os, argparse, logging
 import pandas as pd
-import argparse
+
+""" Create processed_weather.csv and weather_summary.json through the terminal:
+python3 pipeline.py --input ../Cities/cities_json/ """
+
+# using logging to track what the script is doing
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 if __name__ == "__main__":
 
+    logging.info(f"Starting pipeline for folder: {folder}")
+
     # using argparse to enable using the folder dynamically
     parser = argparse.ArgumentParser(description="Process weather JSON files.")
-    parser.add_argument("__input", type=str, required=True, help="Path to the JSON folder")
+    parser.add_argument("--input", type=str, required=True, help="Path to the JSON folder")
     args = parser.parse_args()
     folder = args.input
 
