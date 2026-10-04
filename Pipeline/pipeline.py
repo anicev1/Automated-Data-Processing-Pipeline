@@ -7,9 +7,24 @@ python3 pipeline.py --input ../Cities/cities_json/ """
 # using logging to track what the script is doing
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
+# storing the path folder
 class WeatherPipeline:
     def __init__(self, input_folder):
         self.input_folder = input_folder
+
+    def load_data(self):
+
+        data = [] # Current weather data of all cities in the folder
+
+        # Open each file in the folder and append the data to the list
+        for filename in os.listdir(self.input_folder):
+            file_path = os.path.join(self.input_folder, filename)
+
+            with open(file_path, "r") as file:
+                file_data = json.load(file)
+                data.append(file_data)
+        logging.info(f"Loaded {len(data)} files.")
+        return data
 
 if __name__ == "__main__":
 
@@ -21,18 +36,9 @@ if __name__ == "__main__":
 
     logging.info(f"Starting pipeline for folder: {folder}")
 
-    data = [] # Current weather data of all cities in the folder
-
-    # Open each file in the folder and append the data to the list
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
-
-        with open(file_path, "r") as file:
-            file_data = json.load(file)
-            data.append(file_data)
 
     # flattens JSON data into a tabular pandas DataFrame
-    df = pd.json_normalize(data) 
+    # df = pd.json_normalize(data) 
 
     columns = [
         "location.name",
