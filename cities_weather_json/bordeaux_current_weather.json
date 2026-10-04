@@ -1,1 +1,57 @@
-{"location":{"name":"Bordeaux","region":"Aquitaine","country":"France","lat":44.8333,"lon":-0.5667,"tz_id":"Europe/Paris","localtime_epoch":1791076484,"localtime":"2026-10-04 03:14"},"current":{"last_updated_epoch":1791075600,"last_updated":"2026-10-04 03:00","temp_c":17.3,"temp_f":63.2,"is_day":0,"condition":{"text":"Overcast","icon":"//cdn.weatherapi.com/weather/64x64/night/122.png","code":1009},"wind_mph":5.8,"wind_kph":9.4,"wind_degree":101,"wind_dir":"ESE","pressure_mb":1022.0,"pressure_in":30.19,"precip_mm":0.0,"precip_in":0.0,"humidity":86,"cloud":100,"feelslike_c":17.1,"feelslike_f":62.8,"windchill_c":17.3,"windchill_f":63.2,"heatindex_c":17.3,"heatindex_f":63.2,"dewpoint_c":15.0,"dewpoint_f":59.1,"vis_km":10.0,"vis_miles":6.0,"uv":0.0,"gust_mph":16.4,"gust_kph":26.4,"will_it_rain":0,"chance_of_rain":27,"will_it_snow":0,"chance_of_snow":0,"wetbulb_c":15.9,"wetbulb_f":60.6,"short_rad":0,"diff_rad":0,"dni":0,"gti":0}}
+{
+    "location": {
+        "name": "Bordeaux",
+        "region": "Aquitaine",
+        "country": "France",
+        "lat": 44.8333,
+        "lon": -0.5667,
+        "tz_id": "Europe/Paris",
+        "localtime_epoch": 1791076484,
+        "localtime": "2026-10-04 03:14"
+    },
+    "current": {
+        "last_updated_epoch": 1791075600,
+        "last_updated": "2026-10-04 03:00",
+        "temp_c": 17.3,
+        "temp_f": 63.2,
+        "is_day": 0,
+        "condition": {
+            "text": "Overcast",
+            "icon": "//cdn.weatherapi.com/weather/64x64/night/122.png",
+            "code": 1009
+        },
+        "wind_mph": 5.8,
+        "wind_kph": 9.4,
+        "wind_degree": 101,
+        "wind_dir": "ESE",
+        "pressure_mb": 1022.0,
+        "pressure_in": 30.19,
+        "precip_mm": 0.0,
+        "precip_in": 0.0,
+        "humidity": 86,
+        "cloud": 100,
+        "feelslike_c": 17.1,
+        "feelslike_f": 62.8,
+        "windchill_c": 17.3,
+        "windchill_f": 63.2,
+        "heatindex_c": 17.3,
+        "heatindex_f": 63.2,
+        "dewpoint_c": 15.0,
+        "dewpoint_f": 59.1,
+        "vis_km": 10.0,
+        "vis_miles": 6.0,
+        "uv": 0.0,
+        "gust_mph": 16.4,
+        "gust_kph": 26.4,
+        "will_it_rain": 0,
+        "chance_of_rain": 27,
+        "will_it_snow": 0,
+        "chance_of_snow": 0,
+        "wetbulb_c": 15.9,
+        "wetbulb_f": 60.6,
+        "short_rad": 0,
+        "diff_rad": 0,
+        "dni": 0,
+        "gti": 0
+    }
+}
