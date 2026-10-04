@@ -15,7 +15,19 @@ for filename in os.listdir(folder):
 
 
 df = pd.json_normalize(data) # flattens json data into a tabular pandas DataFrame
-print(df.head()) # Return first 5 rows of DataFrame
+
+columns = [
+    "location.name",
+    "location.country",
+    "current.temp_c",
+    "current.humidity",
+    "current.condition.text",
+]
+
+df_filtered = df[columns]
+print(df_filtered)
+
+#print(df.head()) # return first 5 rows of DataFrame
 
 # # print City, Date, Local Time and Temperature of the first 5 cities
 # for item in data[:5]:
