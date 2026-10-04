@@ -1,22 +1,20 @@
 import json
+import os
 
-with open("../cities_weather_json/zurich_current_weather.json", "r") as file:
-    data = json.load(file)
+folder = "../cities_weather_json"
+data = [] # Current weather data of all cities in the folder
 
-city = data.get("location", {}).get("name", "Unknown")
-temp = data.get("current", {}).get("temp_c", "Unknown")
-time = data.get("location", {}).get("localtime", "Unknown")
+# Open each file in the folder and append the data to the list
+for filename in os.listdir(folder):
+    file_path = os.path.join(folder, filename)
 
-print(f"City: {city}, Date: {time[:-6]}, Time: {time[-5:]}, Temperature: {temp}°C")
+    with open(file_path, "r") as file:
+        file_data = json.load(file)
+        data.append(file_data)
 
-
-#dict_keys([
-# 'name', 
-# 'region', 
-# 'country', 
-# 'lat', 
-# 'lon', 
-# 'tz_id', 
-# 'localtime_epoch', 
-# 'localtime'
-# ])
+# print City, Date, Local Time and Temperature
+for item in data[:5]:
+    city = item.get("location", {}).get("name", "Unknown")
+    date = item.get("location", {}).get("localtime", "Unknown")
+    temp_celsius = item.get("current", {}).get("temp_c", "Unknown")
+    print(f"City: {city}, Date: {date[:-6]}, Local Time: {date[-5:]}, Temperature: {temp_celsius}°C")
