@@ -31,5 +31,3 @@ def test_process_data_sorting():
     assert df.iloc[0]["city"] == "Milan" # Hottest city in data
 
     assert "temperature_c" in df.columns
-
-    
