@@ -39,7 +39,7 @@ df_sorted.to_csv("processed_weather.csv", index=False) # create a csv file with 
 # using index location from pandas (iloc)
 stats = { 
     "hottest_city": df_sorted.iloc[0]["city"],
-    "coldest_cidy": df_sorted.iloc[-1]["city"],
+    "coldest_city": df_sorted.iloc[-1]["city"],
     "average_temp_c": round(df_sorted["temperature_c"].mean(), 2)
 }
 
