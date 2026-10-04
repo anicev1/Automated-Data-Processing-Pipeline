@@ -7,6 +7,10 @@ python3 pipeline.py --input ../Cities/cities_json/ """
 # using logging to track what the script is doing
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
+class WeatherPipeline:
+    def __init__(self, input_folder):
+        self.input_folder = input_folder
+
 if __name__ == "__main__":
 
     # using argparse to enable using the folder dynamically
