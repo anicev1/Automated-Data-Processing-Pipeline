@@ -61,16 +61,22 @@ class WeatherPipeline:
         # create a JSON summary file with the criteria from stats
         with open("weather_summary.json", "w") as f:
             json.dump(stats, f, indent=4)
+        logging.info("Results saved successfully")
 
 if __name__ == "__main__":
 
     # using argparse to enable using the folder dynamically
-    parser = argparse.ArgumentParser(description="Process weather JSON files.")
-    parser.add_argument("--input", type=str, required=True, help="Path to the JSON folder")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=str, required=True)
     args = parser.parse_args()
-    folder = args.input
 
+    folder = args.input
     logging.info(f"Starting pipeline for folder: {folder}")
+
+    pipeline = WeatherPipeline(args.input)
+    raw_data = pipeline.load_data()
+    clean_df = pipeline.process_data(raw_data)
+    pipeline.save_results(clean_df)
 
 
 
