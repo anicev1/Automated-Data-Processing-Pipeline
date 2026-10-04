@@ -25,13 +25,13 @@ columns = [
 ]
 
 df_filtered = df[columns]
-print(df_filtered)
+df_clean = df_filtered.rename(columns={
+    "location.name": "city",
+    "location.country": "country",
+    "current.temp_c": "temperature_c",
+    "current.humidity": "humidity_percent",
+    "current.condition.text": "condition"
+})
 
-#print(df.head()) # return first 5 rows of DataFrame
+print(df_clean)
 
-# # print City, Date, Local Time and Temperature of the first 5 cities
-# for item in data[:5]:
-#     city = item["location"]["name"]
-#     date = item["location"]["localtime"]
-#     temp_celsius = item["current"]["temp_c"]
-#     print(f"City: {city}, Date: {date[:-6]}, Local Time: {date[-5:]}, Temperature: {temp_celsius}°C")
