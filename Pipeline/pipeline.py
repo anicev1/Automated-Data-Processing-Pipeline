@@ -7,11 +7,12 @@ data = [] # Current weather data of all cities in the folder
 
 # Open each file in the folder and append the data to the list
 for filename in os.listdir(folder):
-    file_path = os.path.join(folder, filename)
+    if filename != "cities.csv":
+        file_path = os.path.join(folder, filename)
 
-    with open(file_path, "r") as file:
-        file_data = json.load(file)
-        data.append(file_data)
+        with open(file_path, "r") as file:
+            file_data = json.load(file)
+            data.append(file_data)
 
 
 df = pd.json_normalize(data) # flattens json data into a tabular pandas DataFrame
