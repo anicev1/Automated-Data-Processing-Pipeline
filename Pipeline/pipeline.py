@@ -45,7 +45,22 @@ class WeatherPipeline:
             "current.condition.text": "condition"
         })
 
-        return df_clean.sort_values(by="temperature_c", ascending=False) # sort values by temperature_c
+        # return the sorted values by temperature_c
+        return df_clean.sort_values(by="temperature_c", ascending=False)
+
+    def save_results(self, df_sorted):
+        df_sorted.to_csv("processed_weather.csv", index=False) # create a CSV file with the sorted data
+
+        # using index location from pandas (iloc)
+        stats = { 
+            "hottest_city": df_sorted.iloc[0]["city"],
+            "coldest_cidy": df_sorted.iloc[-1]["city"],
+            "average_temp_c": round(df_sorted["temperature_c"].mean(), 2)
+        }
+
+        # create a JSON summary file with the criteria from stats
+        with open("weather_summary.json", "w") as f:
+            json.dump(stats, f, indent=4)
 
 if __name__ == "__main__":
 
@@ -57,19 +72,5 @@ if __name__ == "__main__":
 
     logging.info(f"Starting pipeline for folder: {folder}")
 
-
-    # df_sorted.to_csv("processed_weather.csv", index=False) # create a CSV file with the sorted data
-
-
-    # using index location from pandas (iloc)
-    stats = { 
-        "hottest_city": df_sorted.iloc[0]["city"],
-        "coldest_cidy": df_sorted.iloc[-1]["city"],
-        "average_temp_c": round(df_sorted["temperature_c"].mean(), 2)
-    }
-
-    # create a JSON summary file with the criteria from stats
-    with open("weather_summary.json", "w") as f:
-        json.dump(stats, f, indent=4)
 
 
