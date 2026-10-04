@@ -16,14 +16,18 @@ class WeatherPipeline:
         data = [] # Current weather data of all cities in the folder
 
         # Open each file in the folder and append the data to the list
-        for filename in os.listdir(self.input_folder):
-            file_path = os.path.join(self.input_folder, filename)
+        try:
+            for filename in os.listdir(self.input_folder):
+                file_path = os.path.join(self.input_folder, filename)
 
-            with open(file_path, "r") as file:
-                file_data = json.load(file)
-                data.append(file_data)
-        logging.info(f"Loaded {len(data)} files.")
-        return data
+                with open(file_path, "r") as file:
+                    file_data = json.load(file)
+                    data.append(file_data)
+            logging.info(f"Loaded {len(data)} files.")
+            return data
+        except FileNotFoundError:
+            logging.error(f"The folder '{self.input_folder}' does not exist!")
+            return []
 
     def process_data(self, data):
         df = pd.json_normalize(data) # transforms JSON data into a 2D pandas DataFrame
