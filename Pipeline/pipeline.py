@@ -14,7 +14,7 @@ for filename in os.listdir(folder):
 
 # print City, Date, Local Time and Temperature of the first 5 cities
 for item in data[:5]:
-    city = item.get("location", {}).get("name", "Unknown")
-    date = item.get("location", {}).get("localtime", "Unknown")
-    temp_celsius = item.get("current", {}).get("temp_c", "Unknown")
+    city = item["location"]["name"]
+    date = item["location"]["localtime"]
+    temp_celsius = item["current"]["temp_c"]
     print(f"City: {city}, Date: {date[:-6]}, Local Time: {date[-5:]}, Temperature: {temp_celsius}°C")
