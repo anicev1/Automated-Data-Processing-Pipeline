@@ -1,9 +1,16 @@
 import json
 import os
 import pandas as pd
+import argparse
 
 if __name__ == "__main__":
-    folder = "../Cities/cities_json"
+
+    # using argparse to enable using the folder dynamically
+    parser = argparse.ArgumentParser(description="Process weather JSON files.")
+    parser.add_argument("__input", type=str, required=True, help="Path to the JSON folder")
+    args = parser.parse_args()
+    folder = args.input
+
     data = [] # Current weather data of all cities in the folder
 
     # Open each file in the folder and append the data to the list
@@ -14,7 +21,7 @@ if __name__ == "__main__":
             file_data = json.load(file)
             data.append(file_data)
 
-    # flattens json data into a tabular pandas DataFrame
+    # flattens JSON data into a tabular pandas DataFrame
     df = pd.json_normalize(data) 
 
     columns = [
@@ -25,7 +32,7 @@ if __name__ == "__main__":
         "current.condition.text",
     ]
 
-    df_filtered = df[columns] # filter json data with categories from columns
+    df_filtered = df[columns] # filter JSON data with categories from columns
     df_clean = df_filtered.rename(columns={ # rename column names from columns
         "location.name": "city",
         "location.country": "country",
@@ -35,7 +42,7 @@ if __name__ == "__main__":
     })
 
     df_sorted = df_clean.sort_values(by="temperature_c", ascending=False) # sort values by temperature_c
-    df_sorted.to_csv("processed_weather.csv", index=False) # create a csv file with the sorted data
+    df_sorted.to_csv("processed_weather.csv", index=False) # create a CSV file with the sorted data
 
     # using index location from pandas (iloc)
     stats = { 
@@ -44,7 +51,7 @@ if __name__ == "__main__":
         "average_temp_c": round(df_sorted["temperature_c"].mean(), 2)
     }
 
-    # create a json summary file with the criteria from stats
+    # create a JSON summary file with the criteria from stats
     with open("weather_summary.json", "w") as f:
         json.dump(stats, f, indent=4)
 
