@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 
 """
 Source: https://www.weatherapi.com/
-This code goes through a .csv file with random cities, checks if 
+This code goes through a CSV file with random cities, checks if 
 there is data on weatherapi.com for each city, and then downloads
-.json files with weather data, which is then used for pipeline.py.
+JSON files with weather data, which is then used for pipeline.py.
 """
 
 # load API key from hidden .env file
