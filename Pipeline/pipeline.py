@@ -1,7 +1,7 @@
 import json, os, argparse, logging
 import pandas as pd
 
-""" Create processed_weather.csv and weather_summary.json through the terminal:
+""" Create processed_weather.csv and weather_summary.json on the terminal:
 python3 pipeline.py --input ../Cities/cities_json/ """
 
 # using logging to track what the script is doing
@@ -13,7 +13,6 @@ class WeatherPipeline:
         self.input_folder = input_folder
 
     def load_data(self):
-
         data = [] # Current weather data of all cities in the folder
 
         # Open each file in the folder and append the data to the list
@@ -26,6 +25,28 @@ class WeatherPipeline:
         logging.info(f"Loaded {len(data)} files.")
         return data
 
+    def process_data(self, data):
+        df = pd.json_normalize(data) # transforms JSON data into a 2D pandas DataFrame
+
+        columns = [
+            "location.name",
+            "location.country",
+            "current.temp_c",
+            "current.humidity",
+            "current.condition.text",
+        ]
+
+        df_filtered = df[columns] # filter JSON data with categories from columns
+        df_clean = df_filtered.rename(columns={ # rename column names from columns
+            "location.name": "city",
+            "location.country": "country",
+            "current.temp_c": "temperature_c",
+            "current.humidity": "humidity_percent",
+            "current.condition.text": "condition"
+        })
+
+        return df_clean.sort_values(by="temperature_c", ascending=False) # sort values by temperature_c
+
 if __name__ == "__main__":
 
     # using argparse to enable using the folder dynamically
@@ -37,28 +58,8 @@ if __name__ == "__main__":
     logging.info(f"Starting pipeline for folder: {folder}")
 
 
-    # flattens JSON data into a tabular pandas DataFrame
-    # df = pd.json_normalize(data) 
+    # df_sorted.to_csv("processed_weather.csv", index=False) # create a CSV file with the sorted data
 
-    columns = [
-        "location.name",
-        "location.country",
-        "current.temp_c",
-        "current.humidity",
-        "current.condition.text",
-    ]
-
-    df_filtered = df[columns] # filter JSON data with categories from columns
-    df_clean = df_filtered.rename(columns={ # rename column names from columns
-        "location.name": "city",
-        "location.country": "country",
-        "current.temp_c": "temperature_c",
-        "current.humidity": "humidity_percent",
-        "current.condition.text": "condition"
-    })
-
-    df_sorted = df_clean.sort_values(by="temperature_c", ascending=False) # sort values by temperature_c
-    df_sorted.to_csv("processed_weather.csv", index=False) # create a CSV file with the sorted data
 
     # using index location from pandas (iloc)
     stats = { 
