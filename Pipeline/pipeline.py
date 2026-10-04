@@ -1,9 +1,14 @@
 import json
 
-with open("zurich_current_weather.json", "r") as file:
+with open("../cities_weather_json/zurich_current_weather.json", "r") as file:
     data = json.load(file)
 
-print(f"{data["location"].keys()}")
+city = data.get("location", {}).get("name", "Unknown")
+temp = data.get("current", {}).get("temp_c", "Unknown")
+time = data.get("location", {}).get("localtime", "Unknown")
+
+print(f"City: {city}, Date: {time[:-6]}, Time: {time[-5:]}, Temperature: {temp}°C")
+
 
 #dict_keys([
 # 'name', 
